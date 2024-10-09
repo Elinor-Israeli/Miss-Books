@@ -6,7 +6,9 @@ import { Home } from "./pages/Home.jsx"
 import { BooksIndex } from "./pages/BooksIndex.jsx"
 
 export function App() {
+
     const [page, setPage] = useState('book')
+    
     return (
         <section className="app">
             <AppHeader onSetPage={ (page) => setPage(page)}/>
