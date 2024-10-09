@@ -57,9 +57,10 @@ function _createBooks() {
     let books = loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = [
-            _createBook('Animal Farm', 300),
-            _createBook('The Little Prince', 120),
-            _createBook('The Great Gatsby', 50),
+            _createBook('Akarnae', 300),
+            _createBook('Gweni', 120),
+            _createBook('Unbored', 50),
+            _createBook('Dont panic', 150)
         ]
         saveToStorage(BOOK_KEY, books)
     }
