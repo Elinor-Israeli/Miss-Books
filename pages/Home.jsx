@@ -1,10 +1,10 @@
-import { UserPreview } from '../cmps/UserPreview.jsx'
+import { BooksPreview} from '../cmps/BooksPreview.jsx'
 
 export function Home() {
     return (
         <section>
-            <h2>Books Store</h2>
-            <UserPreview />
+            <h2>Books R Us!</h2>
+            <BooksPreview />
         </section>
     )
 }
