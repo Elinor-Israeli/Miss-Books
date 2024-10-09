@@ -1,0 +1,5 @@
+.app-header {
+    background-color: var(--purple1);
+    color: var(--purple2);
+    padding-block: 1em;
+}
