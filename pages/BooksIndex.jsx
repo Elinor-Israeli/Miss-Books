@@ -1,4 +1,5 @@
 import { BookList } from "../cmps/BookList.jsx"
+import { UserMsg } from "../cmps/UserMsg.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookDetails } from "./BookDetails.jsx"
 import { bookService } from ".../services/book.service.js"
@@ -54,9 +55,11 @@ export function BooksIndex() {
                 setBooks(books =>
                     books.filter(book => book.id !== bookId)
                 )
+                showSuccessMsg('Book removed successfully')
             })
             .catch(err => {
                 console.log('Problems removing book:', err)
+                showErrorMsg(`Problems removing book (${bookId})`)
             })
     }
 

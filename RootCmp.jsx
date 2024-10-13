@@ -7,6 +7,7 @@ import { Home } from "./pages/Home.jsx"
 import { BooksIndex } from "./pages/BooksIndex.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { BookEdit } from "./pages/BookEdit.jsx"
+import { UserMsg } from "./cmps/UserMsg.jsx"
 
 export function App() {
  
@@ -30,6 +31,7 @@ export function App() {
             </Routes>
    
             </main>
+           <UserMsg/>
         </section>
         </Router>
     )
