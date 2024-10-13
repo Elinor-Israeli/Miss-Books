@@ -1,8 +1,9 @@
 const { useState } = React
 
-
 export function BookEdit({ book, onUpdate, onCancelEdit }) {
 
+    console.log('bookId1:', bookId);
+    
     const [bookToEdit, setBookToEdit] = useState({ ...book })
 
     function handleChange({ target }) {

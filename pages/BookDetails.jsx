@@ -1,9 +1,38 @@
-import { LongTxt } from "../cmps/LongTxt.jsx";
 
-export function BookDetails({ book, onGoBack , onGoEdit}){
-    if (!book) return <div>Loading...</div>;
+const { useParams, useNavigate, Link } = ReactRouterDOM
+import { bookService } from "../services/book.service.js"
+import { LongTxt } from "../cmps/LongTxt.jsx"
+const { useEffect, useState } = React
+
+
+
+export function BookDetails(){
     
+    const [book, setBook] = useState(null)
+    const { bookId } = useParams()
+    console.log('bookId:', bookId);
+    console.log('book:', book);
+    const navigate = useNavigate()
+    console.log('bookId:', bookId);
+    console.log('book:', book);
 
+
+    useEffect(() => {
+        if (bookId)
+            loadBook()
+    }, [bookId])
+
+    function loadBook() {
+        bookService.getById(bookId)
+            .then(setBook)
+            .catch(err => {
+                console.log('err:', err)
+            })
+    }
+
+    function onBack() {
+        navigate('/book')
+    }
 
     function getBookLng(lng) {
         switch (lng) {
@@ -41,8 +70,7 @@ export function BookDetails({ book, onGoBack , onGoEdit}){
     }
 
 
-    console.log('book: ',book);
-
+    if (!book) return <div>Loading...</div>
     const {
         title,
         subtitle,
@@ -53,12 +81,11 @@ export function BookDetails({ book, onGoBack , onGoEdit}){
         categories,
         listPrice
     } = book
-    console.log('book: ',book);
     
     console.log(book.title);
 
     
-    if (!book) return <div>Loading...</div>
+ 
 
     return (
         <section className="book-details-container">
@@ -110,10 +137,13 @@ export function BookDetails({ book, onGoBack , onGoEdit}){
                         </button>
                     }
                     <div className="actions-btns">
-                        <button className="go-back-btn" onClick={onGoBack}>⬅ Go back</button>
-                        <button className="go-edit-btn" onClick={onGoEdit}>Go Edit ➡</button>
+                        <button className="go-back-btn" onClick={onBack} >⬅ Go back</button>
                     </div>
                 </div>
+                <section>
+                <button ><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
+                <button ><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
+            </section>
 
                 <div className="book-details-info-row">
                     <span className="book-details-info-title">Description:</span>
