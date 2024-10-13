@@ -1,10 +1,30 @@
-const { useState } = React
+const { useEffect, useState } = React
+const { useNavigate, useParams, Link } = ReactRouterDOM
+import { bookService } from '../services/book.service.js'
 
-export function BookEdit({ book, onUpdate, onCancelEdit }) {
+export function BookEdit() {
 
-    console.log('bookId1:', bookId);
+    const { bookId } = useParams()
+    const navigate = useNavigate()
+    const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
+
     
-    const [bookToEdit, setBookToEdit] = useState({ ...book })
+
+    useEffect(() => {
+        if (bookId) loadBook()
+    }, [bookId])
+
+    function loadBook() {
+        bookService
+            .getById(bookId)
+            .then((res) => {
+                showSuccessMsg(`successfully loaded ${bookId}`)
+                setBookToEdit(res)
+            })
+            .catch((err) => {
+                console.log(`${err} error problom getting car`)
+            })
+    }
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
@@ -40,8 +60,10 @@ export function BookEdit({ book, onUpdate, onCancelEdit }) {
         ev.preventDefault()
         onUpdate(bookToEdit)
     }
-
-
+    function onBack() {
+        navigate('/book')
+    }
+    if (!bookToEdit) return <div>loading...</div>
     return (
         <section className='book-edit'>
             <h2 className='edit-book-header'>Edit Book</h2>
@@ -91,13 +113,15 @@ export function BookEdit({ book, onUpdate, onCancelEdit }) {
                 </div>
 
                 <div className='book-edit-actions-container'>
-                    <button className='save-edit-btn' >
+                    <button className='save-edit-btn' 
+                    onClick={onSaveBook}
+                    >
                         Save ✔
                     </button>
                     <button
                         type='button'
                         className='cancel-edit-btn'
-                        onClick={onCancelEdit}
+                        onClick={onBack}
                     >
                         Cancel ✖
                     </button>
