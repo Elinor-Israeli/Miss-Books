@@ -20,7 +20,7 @@
 - React.js with Hooks and Context API
 - React Router for navigation
 - Axios for API communication
-- Styled Components / TailwindCSS (choose your stack)
+- Styled Components 
   
 ### Backend
 - Node.js & Express.js
@@ -32,8 +32,7 @@
 ### Dev Tools
 - Git & GitHub
 - Postman for API testing
-- Render / Netlify / Vercel for deployment
-- ESLint + Prettier for code formatting
+
 
 
 
